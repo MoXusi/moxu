@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awx.moxu.mapper.BladeUserMapper">
+
+    <resultMap id="BaseResultMap" type="com.awx.moxu.entity.BladeUser">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="code" column="code" jdbcType="VARCHAR"/>
+            <result property="account" column="account" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+            <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
+            <result property="sex" column="sex" jdbcType="SMALLINT"/>
+            <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
+            <result property="deptId" column="dept_id" jdbcType="VARCHAR"/>
+            <result property="postId" column="post_id" jdbcType="VARCHAR"/>
+            <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,code,account,
+        password,name,real_name,
+        avatar,email,phone,
+        birthday,sex,role_id,
+        dept_id,post_id,create_user,
+        create_time,update_user,update_time,
+        status,is_deleted
+    </sql>
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+            id, code, account, password, name, real_name, avatar, email, phone, birthday, sex, role_id, dept_id, post_id, create_user, create_time, update_user, update_time, status, is_deleted
+        from moxu.blade_user
+        where id = #{id}
+    </select>
+
+    <select id="getRoleAlias" resultType="java.lang.String">
+        SELECT
+        role_alias
+        FROM
+        blade_role
+        WHERE
+        id = #{id}
+        and is_deleted = 0
+    </select>
+
+</mapper>

@@ -1,0 +1,18 @@
+#服务器端口
+server:
+  port: 1030
+
+# DataSource Config
+spring:
+  datasource:
+    #数据源的基本配置
+    username: root
+    password: 231250731
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://8.130.24.143:3306/moxu?useUnicode=true&characterEncoding=utf-8&serverTimezone = UTC&useSSL=false
+  redis:
+    host: 8.130.24.143
+    port: 6379
+    password: 231250731
+
+#JWT  //key的大小必须大于或等于256bit,需要32位英文字符，一个英文字符为：8bit,一个中文字符为12bit
