@@ -60,6 +60,7 @@ public class TokenUtil {
 		param.put("user_name", user.getAccount());
 		param.put("role_name", userInfo.getRoles().toString());
 		String token = JwtUtils.createJwt(param);
+		System.out.println("token:"+token);
 
 		AuthInfo authInfo = new AuthInfo();
 		authInfo.setUserId(user.getId());

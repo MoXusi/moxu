@@ -16,6 +16,9 @@ public class JwtUtils {
     private static final String key = "awx1030moxudasiwaqeozjdffeqqqazda";
     //设置加密算法
     private static SignatureAlgorithm signatureAlgorithm=SignatureAlgorithm.HS256;
+
+    public static Integer AUTH_LENGTH = 7;
+    public static String BEARER = "bearer";
     /**
      * 获取转换后的私钥对象
      * @return
@@ -41,9 +44,26 @@ public class JwtUtils {
         return Jwts.builder()
                 .setClaims(payLoad)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(JWT_TTL))
+                .setExpiration(new Date(System.currentTimeMillis()+JWT_TTL))
                 .signWith(getSecretKey(),signatureAlgorithm)
                 .compact();
+    }
+
+    /**
+     * 获取token串
+     *
+     * @param auth token
+     * @return String
+     */
+    public static String getToken(String auth) {
+        if ((auth != null) && (auth.length() > AUTH_LENGTH)) {
+            String headStr = auth.substring(0, 6).toLowerCase();
+            if (headStr.compareTo(BEARER) == 0) {
+                auth = auth.substring(7);
+            }
+            return auth;
+        }
+        return null;
     }
     /**
      * 解析JWS，返回一个布尔结果
@@ -53,7 +73,7 @@ public class JwtUtils {
     public static Boolean parseJwt(String jwsString){
         boolean result= false;
         try {
-            Jwts.parserBuilder()
+            Jws<Claims> claimsJws = Jwts.parserBuilder()
                     .setSigningKey(getSecretKey())
                     .build()
                     .parseClaimsJws(jwsString);
@@ -113,13 +133,13 @@ public class JwtUtils {
     }
 
     public static void main(String[] args) {
-        JwtUtils jwtUtils = new JwtUtils();
         Date exp = new Date(System.currentTimeMillis()+60*60*24);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("name","张三");
-        String jwt = jwtUtils.createJwt(exp, hashMap);
+        String jwt = createJwt(exp, hashMap);
         System.out.println(jwt);
-        System.out.println(jwtUtils.getPayLoadALSOExcludeExpAndIat(jwt));
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlX25hbWUiOiJbYWRtaW5pc3RyYXRvcl0iLCJ1c2VyX2lkIjoiMSIsInJvbGVfaWQiOiIxMTIzNTk4ODE2NzM4Njc1MjAxIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiYWNjb3VudCI6ImFkbWluIiwiaWF0IjoxNjc2NjAzNDE4LCJleHAiOjg2NDAwfQ.eQOSWEeIg4GLSpU4qyayvjIxVavJ6Rsj3LwRXCVdDOQ";
+        System.out.println(getPayLoadALSOExcludeExpAndIat(token));
     }
 
 }

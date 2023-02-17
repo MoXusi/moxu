@@ -23,7 +23,7 @@ import com.awx.moxu.entity.UserInfo;
 import com.awx.moxu.granter.ITokenGranter;
 import com.awx.moxu.granter.PasswordTokenGranter;
 import com.awx.moxu.granter.TokenGranterBuilder;
-import com.awx.moxu.utils.R;
+import com.awx.moxu.utils.R.R;
 import com.awx.moxu.utils.RedisUtils;
 import com.awx.moxu.utils.TokenUtil;
 import com.wf.captcha.SpecCaptcha;
@@ -71,7 +71,7 @@ public class AuthController {
 		if (userInfo == null || userInfo.getUser() == null || userInfo.getUser().getId() == null) {
 			return R.fail(TokenUtil.USER_NOT_FOUND);
 		}
-		return R.ok(TokenUtil.createAuthInfo(userInfo));
+		return R.data(TokenUtil.createAuthInfo(userInfo));
 	}
 
 	@GetMapping("/captcha")
@@ -85,7 +85,7 @@ public class AuthController {
 		json.putOpt("key", key);
 		json.putOpt("image", specCaptcha.toBase64());
 		// 将key和base64返回给前端
-		return R.ok(json);
+		return R.data(json);
 	}
 
 }

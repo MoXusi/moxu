@@ -19,7 +19,7 @@ import cn.hutool.core.util.StrUtil;
 import com.awx.moxu.controller.CacheNames;
 import com.awx.moxu.entity.UserInfo;
 import com.awx.moxu.service.impl.BladeUserServiceImpl;
-import com.awx.moxu.utils.R;
+import com.awx.moxu.utils.R.R;
 import com.awx.moxu.utils.RedisUtils;
 import com.awx.moxu.utils.TokenUtil;
 import com.awx.moxu.utils.WebUtils;

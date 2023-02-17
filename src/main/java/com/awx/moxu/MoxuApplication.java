@@ -12,7 +12,6 @@ public class MoxuApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext run = SpringApplication.run(MoxuApplication.class, args);
-		JwtUtils jwtUtils = run.getBean("jwtUtils", JwtUtils.class);
 	}
 
 
