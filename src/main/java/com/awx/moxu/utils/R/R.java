@@ -1,11 +1,12 @@
 package com.awx.moxu.utils.R;
 
+import com.awx.moxu.filter.BizException;
 import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
 import java.util.Optional;
 
-public class R<T> implements Serializable {
+public class R<T>  implements Serializable  {
     private static final long serialVersionUID = 1L;
     private int code;
     private boolean success;
@@ -14,6 +15,9 @@ public class R<T> implements Serializable {
 
     private R(IResultCode resultCode) {
         this(resultCode, (T) null, resultCode.getMessage());
+    }
+    private R(BizException resultCode) {
+        this(resultCode, (T) null, resultCode.getMsg());
     }
 
     private R(IResultCode resultCode, String msg) {
@@ -27,7 +31,9 @@ public class R<T> implements Serializable {
     private R(IResultCode resultCode, T data, String msg) {
         this(resultCode.getCode(), data, msg);
     }
-
+    private R(BizException resultCode, T data, String msg) {
+        this(resultCode.getCode(), data, msg);
+    }
     private R(int code, T data, String msg) {
         this.code = code;
         this.data = data;
@@ -78,6 +84,9 @@ public class R<T> implements Serializable {
     }
 
     public static <T> R<T> fail(IResultCode resultCode) {
+        return new R(resultCode);
+    }
+    public static <T> R<T> fail(BizException resultCode) {
         return new R(resultCode);
     }
 

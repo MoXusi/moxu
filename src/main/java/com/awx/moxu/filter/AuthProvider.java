@@ -1,4 +1,4 @@
-package com.awx.moxu.utils.filter;
+package com.awx.moxu.filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +22,12 @@ public class AuthProvider {
         DEFAULT_SKIP_URL.add("/auth/**");
         DEFAULT_SKIP_URL.add("/oauth/**");
         DEFAULT_SKIP_URL.add("/log/**");
-//        DEFAULT_SKIP_URL.add("/menu/routes");
+        DEFAULT_SKIP_URL.add("/menu/routes");
         DEFAULT_SKIP_URL.add("/menu/auth-routes");
         DEFAULT_SKIP_URL.add("/tenant/info");
         DEFAULT_SKIP_URL.add("/order/create/**");
         DEFAULT_SKIP_URL.add("/storage/deduct/**");
-        DEFAULT_SKIP_URL.add("/error/**");
+//        DEFAULT_SKIP_URL.add("/error/**");
         DEFAULT_SKIP_URL.add("/assets/**");
     }
 

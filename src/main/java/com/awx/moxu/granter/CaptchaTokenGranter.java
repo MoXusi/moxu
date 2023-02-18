@@ -18,6 +18,7 @@ package com.awx.moxu.granter;
 import cn.hutool.core.util.StrUtil;
 import com.awx.moxu.controller.CacheNames;
 import com.awx.moxu.entity.UserInfo;
+import com.awx.moxu.filter.BizException;
 import com.awx.moxu.service.impl.BladeUserServiceImpl;
 import com.awx.moxu.utils.R.R;
 import com.awx.moxu.utils.RedisUtils;
@@ -56,7 +57,7 @@ public class CaptchaTokenGranter implements ITokenGranter {
 		String redisCode = String.valueOf(redisUtils.get(CacheNames.CAPTCHA_KEY + key));
 		// 判断验证码
 		if (code == null || !redisCode.equals(code)) {
-			throw new Exception(TokenUtil.CAPTCHA_NOT_CORRECT);
+			throw new BizException(TokenUtil.CAPTCHA_NOT_CORRECT);
 		}
 		String account = (String) tokenParameter.get("account");
 		String password = (String) tokenParameter.get("password");

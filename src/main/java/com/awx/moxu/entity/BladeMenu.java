@@ -18,7 +18,7 @@ public class BladeMenu implements Serializable {
      * 主键
      */
     @TableId
-    private Long id;
+    private String id;
 
     /**
      * 父级菜单

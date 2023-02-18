@@ -1,7 +1,10 @@
 package com.awx.moxu.service;
 
 import com.awx.moxu.entity.Menu;
+import com.awx.moxu.vo.MenuVO;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
 * @author admin
@@ -10,4 +13,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface MenuService extends IService<Menu> {
 
+    /**
+     * 菜单树形结构
+     *
+     * @param roleId
+     * @return
+     */
+    List<MenuVO> routes(String roleId);
 }

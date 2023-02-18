@@ -54,14 +54,14 @@ public class TokenUtil {
 		Map<String, Object> param = new HashMap<>(16);
 		param.put("token_type", "access_token");
 		param.put("oauth_id", userInfo.getOauthId());
-		param.put("user_id", user.getId());
+		param.put("id", user.getId());
 		param.put("role_id", user.getRoleId());
 		param.put("account", user.getAccount());
-		param.put("user_name", user.getAccount());
+		param.put("name", user.getAccount());
 		param.put("role_name", userInfo.getRoles().toString());
 		String token = JwtUtils.createJwt(param);
 		System.out.println("token:"+token);
-
+		System.out.println(user);
 		AuthInfo authInfo = new AuthInfo();
 		authInfo.setUserId(user.getId());
 		authInfo.setOauthId(userInfo.getOauthId());

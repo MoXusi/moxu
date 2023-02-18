@@ -18,12 +18,12 @@ public class Menu implements Serializable {
      * 主键
      */
     @TableId
-    private Long id;
+    private String id;
 
     /**
      * 父级菜单
      */
-    private Long parentId;
+    private String parentId;
 
     /**
      * 菜单编号

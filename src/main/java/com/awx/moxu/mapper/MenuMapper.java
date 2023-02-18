@@ -30,7 +30,7 @@ public interface MenuMapper extends BaseMapper<Menu> {
      * @param roleId
      * @return
      */
-    List<Menu> roleMenu(List<Long> roleId);
+    List<Menu> roleMenu(List<String> roleId);
 }
 
 

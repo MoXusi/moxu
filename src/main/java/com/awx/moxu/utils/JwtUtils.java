@@ -1,13 +1,19 @@
 package com.awx.moxu.utils;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
+import com.awx.moxu.entity.BladeUser;
+import com.awx.moxu.filter.AuthProvider;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Value;
+
 //@Component
 @Component
 public class JwtUtils {
@@ -131,7 +137,27 @@ public class JwtUtils {
         map.remove("iat");
         return map;
     }
-
+    /**
+     * 获取用戶
+     *
+     * @param auth token
+     * @return String
+     */
+    public static BladeUser getUser(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        if (StrUtil.hasBlank(path)) {
+            return null;
+        }
+        Enumeration<String> headers = request.getHeaders(AuthProvider.AUTH_KEY);
+        String headerToken = headers.nextElement();
+        if (StrUtil.isBlank(headerToken)){
+            return null;
+        }
+        String token = JwtUtils.getToken(headerToken);
+        Map<String, Object> payLoadALSOExcludeExpAndIat = JwtUtils.getPayLoadALSOExcludeExpAndIat(token);
+        BladeUser bladeUser = BeanUtil.mapToBean(payLoadALSOExcludeExpAndIat, BladeUser.class, false);
+        return bladeUser;
+    }
     public static void main(String[] args) {
         Date exp = new Date(System.currentTimeMillis()+60*60*24);
         HashMap<String, Object> hashMap = new HashMap<>();

@@ -30,11 +30,11 @@
 
 
     <select id="allMenu" resultMap="menuResultMap">
-        select * from blade_menu where is_deleted = 0 and category = 1
+        select * from menu where is_deleted = 0 and category = 1
     </select>
 
     <select id="roleMenu" resultMap="menuResultMap">
-        select * from blade_menu where is_deleted = 0 and id IN ( SELECT menu_id FROM blade_role_menu WHERE role_id IN
+        select * from menu where is_deleted = 0 and id IN ( SELECT menu_id FROM blade_role_menu WHERE role_id IN
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
             #{item}
         </foreach> )
