@@ -52,8 +52,6 @@ public class AuthController {
 	@Resource
 	RedisUtils redisUtils;
 
-	@Resource
-	private PasswordTokenGranter tokenGranter;
 	@PostMapping("token")
 	public R<AuthInfo> token(@RequestParam(defaultValue = "password", required = false) String grantType,
 							 @RequestParam(required = false) String refreshToken,
