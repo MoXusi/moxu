@@ -140,7 +140,7 @@ public class JwtUtils {
     /**
      * 获取用戶
      *
-     * @param auth token
+     * @param request
      * @return String
      */
     public static BladeUser getUser(HttpServletRequest request) {
@@ -164,8 +164,8 @@ public class JwtUtils {
         hashMap.put("name","张三");
         String jwt = createJwt(exp, hashMap);
         System.out.println(jwt);
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlX25hbWUiOiJbYWRtaW5pc3RyYXRvcl0iLCJ1c2VyX2lkIjoiMSIsInJvbGVfaWQiOiIxMTIzNTk4ODE2NzM4Njc1MjAxIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiYWNjb3VudCI6ImFkbWluIiwiaWF0IjoxNjc2NjAzNDE4LCJleHAiOjg2NDAwfQ.eQOSWEeIg4GLSpU4qyayvjIxVavJ6Rsj3LwRXCVdDOQ";
-        System.out.println(getPayLoadALSOExcludeExpAndIat(token));
+//        String token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlX25hbWUiOiJbYWRtaW5pc3RyYXRvcl0iLCJ1c2VyX2lkIjoiMSIsInJvbGVfaWQiOiIxMTIzNTk4ODE2NzM4Njc1MjAxIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiYWNjb3VudCI6ImFkbWluIiwiaWF0IjoxNjc2NjAzNDE4LCJleHAiOjg2NDAwfQ.eQOSWEeIg4GLSpU4qyayvjIxVavJ6Rsj3LwRXCVdDOQ";
+//        System.out.println(getPayLoadALSOExcludeExpAndIat(token));
     }
 
 }

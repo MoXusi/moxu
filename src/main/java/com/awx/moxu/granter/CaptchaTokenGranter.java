@@ -57,7 +57,7 @@ public class CaptchaTokenGranter implements ITokenGranter {
 		String redisCode = String.valueOf(redisUtils.get(CacheNames.CAPTCHA_KEY + key));
 		// 判断验证码
 		if (code == null || !redisCode.equals(code)) {
-			throw new BizException(TokenUtil.CAPTCHA_NOT_CORRECT);
+			throw new BizException(400,TokenUtil.CAPTCHA_NOT_CORRECT);
 		}
 		String account = (String) tokenParameter.get("account");
 		String password = (String) tokenParameter.get("password");

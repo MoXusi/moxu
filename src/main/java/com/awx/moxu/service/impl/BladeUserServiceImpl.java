@@ -1,7 +1,6 @@
 package com.awx.moxu.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.util.StrUtil;
 import com.awx.moxu.entity.UserInfo;
 import com.awx.moxu.utils.Aes;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -11,7 +10,6 @@ import com.awx.moxu.service.BladeUserService;
 import com.awx.moxu.mapper.BladeUserMapper;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,19 +20,19 @@ import java.util.List;
 @Service
 public class BladeUserServiceImpl extends ServiceImpl<BladeUserMapper, BladeUser>
     implements BladeUserService{
-    @Resource
-    private Aes aes;
+
     @Override
     public int saveUser(BladeUser bladeUser) {
-        bladeUser.setPassword(aes.encryptHex(bladeUser.getPassword()));
+        bladeUser.setPassword(Aes.encryptHex(bladeUser.getPassword()));
         return baseMapper.insert(bladeUser);
     }
+
     @Override
     public UserInfo userInfo(String account,String password) {
         UserInfo userInfo = new UserInfo();
         LambdaQueryWrapper<BladeUser> queryWrapper = new LambdaQueryWrapper();
         queryWrapper.eq(BladeUser::getAccount,account);
-        queryWrapper.eq(BladeUser::getPassword,aes.encryptHex(password));
+        queryWrapper.eq(BladeUser::getPassword, Aes.encryptHex(password));
         BladeUser bladeUser = baseMapper.selectOne(queryWrapper);
         userInfo.setUser(bladeUser);
         if (!BeanUtil.isEmpty(bladeUser)) {
