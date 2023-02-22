@@ -31,6 +31,15 @@ public interface MenuMapper extends BaseMapper<Menu> {
      * @return
      */
     List<Menu> roleMenu(List<String> roleId);
+
+
+    /**
+     * 按钮树形结构
+     *
+     * @param roleId
+     * @return
+     */
+    List<Menu> buttons(List<String> roleId);
 }
 
 

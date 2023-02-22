@@ -18,4 +18,11 @@ public interface DictService extends IService<Dict> {
      * @return
      */
     List<DictVO> tree();
+
+    /**
+     * 新增或修改
+     * @param dict
+     * @return
+     */
+    boolean submit(Dict dict);
 }

@@ -30,7 +30,7 @@ public class DictWrapper {
 
     public DictVO entityVO(Dict dict) {
         DictVO dictVO = BeanUtil.copyProperties(dict, DictVO.class);
-        if (dict.getParentId().equals(CommonConstant.TOP_PARENT_ID)) {
+        if (!dict.getParentId().equals(CommonConstant.TOP_PARENT_ID)) {
             dictVO.setParentName(CommonConstant.TOP_PARENT_NAME);
         } else {
             Dict parent = dictService.getById(dict.getParentId());

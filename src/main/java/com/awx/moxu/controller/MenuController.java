@@ -32,6 +32,15 @@ public class MenuController {
         return R.data(list);
     }
     /**
+     * 前端按钮数据
+     */
+    @GetMapping("/buttons")
+    public R<List<MenuVO>> buttons(HttpServletRequest request) {
+        BladeUser user = JwtUtils.getUser(request);
+        List<MenuVO> list = menuService.buttons(user.getRoleId());
+        return R.data(list);
+    }
+    /**
      * 列表
      */
     @GetMapping("/list")

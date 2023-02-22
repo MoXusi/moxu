@@ -4,10 +4,13 @@ import cn.hutool.core.util.StrUtil;
 import com.awx.moxu.utils.Func;
 import com.awx.moxu.vo.MenuVO;
 import com.awx.moxu.wrapper.MenuWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.awx.moxu.entity.Menu;
 import com.awx.moxu.service.MenuService;
 import com.awx.moxu.mapper.MenuMapper;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -47,6 +50,14 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu>
             recursion(allMenus, routes, menu.get());
         }
     }
+
+    @Override
+    public List<MenuVO> buttons(String roleId) {
+        List<Menu> buttons = baseMapper.buttons(Func.toStringList(roleId));
+        MenuWrapper menuWrapper = new MenuWrapper();
+        return menuWrapper.listNodeVO(buttons);
+    }
+
 
 }
 
