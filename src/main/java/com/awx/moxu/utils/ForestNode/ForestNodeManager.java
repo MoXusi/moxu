@@ -46,7 +46,7 @@ public class ForestNodeManager<T extends INode> {
                 }
 
                 forestNode = (INode)var2.next();
-            } while(!forestNode.getParentId().equals("0") && !this.parentIds.contains(forestNode.getId()));
+            } while(!"0".equals(forestNode.getParentId()) && !this.parentIds.contains(forestNode.getId()));
 
             roots.add((T) forestNode);
         }

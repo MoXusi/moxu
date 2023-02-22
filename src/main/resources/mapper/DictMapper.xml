@@ -14,10 +14,19 @@
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
             <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
     </resultMap>
-
+    <resultMap id="treeNodeResultMap" type="com.awx.moxu.utils.ForestNode.TreeNode">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="title" property="title"/>
+        <result column="value" property="value"/>
+        <result column="key" property="key"/>
+    </resultMap>
     <sql id="BaseColumnList">
         id,parent_id,code,
         dict_key,dict_value,sort,
         remark,is_deleted
     </sql>
+    <select id="tree" resultMap="treeNodeResultMap">
+        select id, parent_id, dict_value as title, id as 'value', id as 'key' from dict where is_deleted = 0
+    </select>
 </mapper>

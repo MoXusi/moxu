@@ -1,13 +1,16 @@
 package com.awx.moxu.entity;
 
 import com.awx.moxu.base.BaseEntity;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import lombok.Data;
 
 /**
  * 用户表
+ * @author 沫须水
  * @TableName blade_user
  */
 @TableName(value ="blade_user")

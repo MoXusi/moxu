@@ -1,11 +1,14 @@
 package com.awx.moxu.utils;
 
 import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import org.springframework.lang.Nullable;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class Func {
 
@@ -35,5 +38,32 @@ public class Func {
         List<String> strings = Func.toStringList(str);
         System.out.println(strings);
     }
+    public static boolean isEmpty(@Nullable Object obj) {
+        return ObjectUtil.isEmpty(obj);
+    }
 
+    public static boolean hasEmpty(Object... os) {
+        Object[] var1 = os;
+        int var2 = os.length;
+
+        for(int var3 = 0; var3 < var2; ++var3) {
+            Object o = var1[var3];
+            if (isEmpty(o)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    public static boolean equals(Object obj1, Object obj2) {
+        return Objects.equals(obj1, obj2);
+    }
+
+    public static String toStr(Object str) {
+        return toStr(str, "");
+    }
+
+    public static String toStr(Object str, String defaultValue) {
+        return null == str ? defaultValue : String.valueOf(str);
+    }
 }

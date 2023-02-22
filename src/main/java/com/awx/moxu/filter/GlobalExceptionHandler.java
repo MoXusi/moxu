@@ -40,7 +40,10 @@ public class GlobalExceptionHandler {
             return;
         }
         Enumeration<String> headers = request.getHeaders(AuthProvider.AUTH_KEY);
-        String headerToken = headers.nextElement();
+        String headerToken = null;
+        try {
+            headerToken = headers.nextElement();
+        }catch (Exception e){}
         if (StrUtil.isBlank(headerToken)){
             throw new BizException(401, "缺失令牌,鉴权失败");
         }

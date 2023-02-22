@@ -11,7 +11,7 @@ public class ForestNodeMerger {
     public static <T extends INode> List<T> merge(List<T> items) {
         ForestNodeManager<T> forestNodeManager = new ForestNodeManager(items);
         items.forEach((forestNode) -> {
-            if (!forestNode.getParentId().equals("0")) {
+            if (!"0".equals(forestNode.getParentId())) {
                 INode node = forestNodeManager.getTreeNodeAT(forestNode.getParentId());
                 if (node != null) {
                     node.getChildren().add(forestNode);
