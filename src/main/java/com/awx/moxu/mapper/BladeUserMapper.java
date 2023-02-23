@@ -1,8 +1,11 @@
 package com.awx.moxu.mapper;
 
 import com.awx.moxu.entity.BladeUser;
+import com.awx.moxu.utils.execl.UserExcel;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -48,6 +51,14 @@ public interface BladeUserMapper extends BaseMapper<BladeUser> {
      * @return
      */
     List<String> getDeptName(String[] ids);
+
+    /**
+     * 获取导出用户数据
+     *
+     * @param queryWrapper
+     * @return
+     */
+    List<UserExcel> exportUser(@Param("ew") Wrapper<BladeUser> queryWrapper);
 }
 
 

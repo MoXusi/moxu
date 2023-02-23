@@ -2,6 +2,8 @@ package com.awx.moxu.service;
 
 import com.awx.moxu.entity.BladeUser;
 import com.awx.moxu.entity.UserInfo;
+import com.awx.moxu.utils.execl.UserExcel;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -48,4 +50,11 @@ public interface BladeUserService extends IService<BladeUser> {
      * @return
      */
     boolean submit(BladeUser user);
+    /**
+     * 获取导出用户数据
+     *
+     * @param queryWrapper
+     * @return
+     */
+    List<UserExcel> exportUser(Wrapper<BladeUser> queryWrapper);
 }

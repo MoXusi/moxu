@@ -1,6 +1,7 @@
 package com.awx.moxu.entity;
 
 import com.awx.moxu.base.BaseEntity;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -9,49 +10,36 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 岗位表
- * @TableName post
+ * 参数表
+ * @TableName param
  */
-@TableName(value ="post")
+@TableName(value ="param")
 @Data
-public class Post extends BaseEntity implements Serializable {
-    /**
-     * 主键
-     */
-    @TableId
-    private String id;
+public class Param extends BaseEntity implements Serializable {
 
     /**
-     * 岗位类型
+     * 参数名
      */
-    private Integer category;
+    private String paramName;
 
     /**
-     * 岗位编号
+     * 参数键
      */
-    private String postCode;
+    private String paramKey;
 
     /**
-     * 岗位名称
+     * 参数值
      */
-    private String postName;
+    private String paramValue;
 
     /**
-     * 岗位排序
-     */
-    private Integer sort;
-
-    /**
-     * 岗位描述
+     * 备注
      */
     private String remark;
-
-
     /**
      * 创建部门
      */
-    private Long createDept;
-
+    private String createDept;
     /**
      * 状态
      */
@@ -76,12 +64,11 @@ public class Post extends BaseEntity implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Post other = (Post) that;
+        Param other = (Param) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getCategory() == null ? other.getCategory() == null : this.getCategory().equals(other.getCategory()))
-            && (this.getPostCode() == null ? other.getPostCode() == null : this.getPostCode().equals(other.getPostCode()))
-            && (this.getPostName() == null ? other.getPostName() == null : this.getPostName().equals(other.getPostName()))
-            && (this.getSort() == null ? other.getSort() == null : this.getSort().equals(other.getSort()))
+            && (this.getParamName() == null ? other.getParamName() == null : this.getParamName().equals(other.getParamName()))
+            && (this.getParamKey() == null ? other.getParamKey() == null : this.getParamKey().equals(other.getParamKey()))
+            && (this.getParamValue() == null ? other.getParamValue() == null : this.getParamValue().equals(other.getParamValue()))
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
             && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()))
             && (this.getCreateDept() == null ? other.getCreateDept() == null : this.getCreateDept().equals(other.getCreateDept()))
@@ -97,10 +84,9 @@ public class Post extends BaseEntity implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getCategory() == null) ? 0 : getCategory().hashCode());
-        result = prime * result + ((getPostCode() == null) ? 0 : getPostCode().hashCode());
-        result = prime * result + ((getPostName() == null) ? 0 : getPostName().hashCode());
-        result = prime * result + ((getSort() == null) ? 0 : getSort().hashCode());
+        result = prime * result + ((getParamName() == null) ? 0 : getParamName().hashCode());
+        result = prime * result + ((getParamKey() == null) ? 0 : getParamKey().hashCode());
+        result = prime * result + ((getParamValue() == null) ? 0 : getParamValue().hashCode());
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
         result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
         result = prime * result + ((getCreateDept() == null) ? 0 : getCreateDept().hashCode());
@@ -112,23 +98,4 @@ public class Post extends BaseEntity implements Serializable {
         return result;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", category=").append(category);
-        sb.append(", postCode=").append(postCode);
-        sb.append(", postName=").append(postName);
-        sb.append(", sort=").append(sort);
-        sb.append(", remark=").append(remark);
-        sb.append(", createDept=").append(createDept);
-        sb.append(", status=").append(status);
-        sb.append(", isDeleted=").append(isDeleted);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 }

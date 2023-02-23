@@ -3,6 +3,7 @@ package com.awx.moxu.service.impl;
 import com.awx.moxu.entity.RoleMenu;
 import com.awx.moxu.service.RoleMenuService;
 import com.awx.moxu.utils.ForestNode.ForestNodeMerger;
+import com.awx.moxu.utils.Func;
 import com.awx.moxu.vo.RoleVO;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -42,6 +44,20 @@ implements BladeRoleService{
         }));
         // 新增配置v
         return roleMenuService.saveBatch(roleMenus);
+    }
+
+    @Override
+    public String getRoleIds(String roleNames) {
+        List<BladeRole> roleList = baseMapper.selectList(Wrappers.<BladeRole>query().lambda().in(BladeRole::getRoleName, Func.toStrArray(roleNames)));
+        if (roleList != null && roleList.size() > 0) {
+            return roleList.stream().map(role -> Func.toStr(role.getId())).distinct().collect(Collectors.joining(","));
+        }
+        return null;
+    }
+
+    @Override
+    public List<String> getRoleNames(String roleIds) {
+        return baseMapper.getRoleNames(Func.toStrArray(roleIds));
     }
 }
 

@@ -30,6 +30,14 @@ public interface BladeRoleMapper extends BaseMapper<BladeRole> {
      * @return
      */
     List<RoleVO> tree();
+
+    /**
+     * 获取角色名
+     *
+     * @param ids
+     * @return
+     */
+    List<String> getRoleNames(String[] ids);
 }
 
 

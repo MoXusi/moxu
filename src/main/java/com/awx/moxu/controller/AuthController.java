@@ -31,6 +31,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -54,7 +55,6 @@ public class AuthController {
 							 @RequestParam(required = false) String refreshToken,
 							 @RequestParam(required = false) String account,
 							 @RequestParam(required = false) String password) throws Exception {
-
 		Map<String,Object> map = new HashMap<>();
 		map.put("account",account);
 		map.put("password",password);

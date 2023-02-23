@@ -79,4 +79,8 @@
         </foreach>
         and is_deleted = 0
     </select>
+
+    <select id="exportUser" resultType="com.awx.moxu.utils.execl.UserExcel">
+        SELECT id, account, name, real_name, email, phone, birthday, role_id, dept_id, post_id FROM blade_user ${ew.customSqlSegment}
+    </select>
 </mapper>

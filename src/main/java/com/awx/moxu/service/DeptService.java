@@ -15,4 +15,20 @@ public interface DeptService extends IService<Dept> {
      * @return
      */
     List<DeptVO> tree();
+
+    /**
+     * 获取部门名
+     *
+     * @param deptIds
+     * @return
+     */
+    List<String> getDeptNames(String deptIds);
+
+    /**
+     * 获取部门ID
+     *
+     * @param deptNames
+     * @return
+     */
+    String getDeptIds(String deptNames);
 }

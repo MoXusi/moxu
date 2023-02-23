@@ -61,7 +61,7 @@ public class Condition {
     }
 
     public static <T> QueryWrapper<T> getQueryWrapper(Map<String, Object> query, Class<T> clazz) {
-        Kv exclude = Kv.init().set("current", "current").set("size", "size").set("ascs", "ascs").set("descs", "descs");
+        Kv exclude = Kv.init().set("blade-auth", "blade-auth").set("current", "current").set("size", "size").set("ascs", "ascs").set("descs", "descs");
         return getQueryWrapper(query, exclude, clazz);
     }
 

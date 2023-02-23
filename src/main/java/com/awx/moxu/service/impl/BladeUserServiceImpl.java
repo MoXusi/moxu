@@ -1,10 +1,15 @@
 package com.awx.moxu.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ArrayUtil;
 import com.awx.moxu.entity.UserInfo;
 import com.awx.moxu.filter.BizException;
+import com.awx.moxu.service.DeptService;
+import com.awx.moxu.service.ISysClient;
 import com.awx.moxu.utils.Aes;
 import com.awx.moxu.utils.Func;
+import com.awx.moxu.utils.execl.UserExcel;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -23,6 +28,8 @@ import java.util.List;
 @Service
 public class BladeUserServiceImpl extends ServiceImpl<BladeUserMapper, BladeUser>
     implements BladeUserService{
+
+    private ISysClient sysClient;
 
     @Override
     public int saveUser(BladeUser bladeUser) {
@@ -64,7 +71,16 @@ public class BladeUserServiceImpl extends ServiceImpl<BladeUserMapper, BladeUser
         }
         return saveOrUpdate(user);
     }
-
+    @Override
+    public List<UserExcel> exportUser(Wrapper<BladeUser> queryWrapper) {
+        List<UserExcel> userList = baseMapper.exportUser(queryWrapper);
+        userList.forEach(user -> {
+            user.setRoleName(ArrayUtil.join(sysClient.getRoleName(user.getRoleId()),","));
+            user.setDeptName(ArrayUtil.join(sysClient.getDeptNames(user.getDeptId()),","));
+            user.setPostName(ArrayUtil.join(sysClient.getPostNames(user.getPostId()),","));
+        });
+        return userList;
+    }
 }
 
 

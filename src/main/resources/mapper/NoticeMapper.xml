@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awx.moxu.mapper.NoticeMapper">
+
+    <resultMap id="BaseResultMap" type="com.awx.moxu.entity.Notice">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="category" column="category" jdbcType="INTEGER"/>
+            <result property="releaseTime" column="release_time" jdbcType="TIMESTAMP"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="createUser" column="create_user" jdbcType="BIGINT"/>
+            <result property="createDept" column="create_dept" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateUser" column="update_user" jdbcType="BIGINT"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,category,
+        release_time,content,create_user,
+        create_dept,create_time,update_user,
+        update_time,status,is_deleted
+    </sql>
+</mapper>

@@ -24,4 +24,20 @@ public interface BladeRoleService extends IService<BladeRole> {
      * @return 是否成功
      */
     boolean grant(List<String> roleIds,List<String> menuIds);
+
+    /**
+     * 获取角色ID
+     *
+     * @param roleNames
+     * @return
+     */
+    String getRoleIds(String roleNames);
+
+    /**
+     * 获取角色名
+     *
+     * @param roleIds
+     * @return
+     */
+    List<String> getRoleNames(String roleIds);
 }

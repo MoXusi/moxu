@@ -40,14 +40,19 @@ public class GlobalExceptionHandler {
             return;
         }
         Enumeration<String> headers = request.getHeaders(AuthProvider.AUTH_KEY);
+
         String headerToken = null;
+        String cookie = null;
         try {
             headerToken = headers.nextElement();
         }catch (Exception e){}
-        if (StrUtil.isBlank(headerToken)){
+        try {
+            cookie = request.getHeaders("cookie").nextElement().split(";")[1].split("=")[1];
+        }catch (Exception e){}
+        if (StrUtil.isAllBlank(headerToken,cookie)){
             throw new BizException(401, "缺失令牌,鉴权失败");
         }
-        String token = JwtUtils.getToken(headerToken);
+        String token = JwtUtils.getToken(headerToken==null?cookie:headerToken);
         Boolean aBoolean = JwtUtils.parseJwt(token);
         if (!aBoolean){
             throw new BizException(401, "请求未授权");

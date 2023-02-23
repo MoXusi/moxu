@@ -22,7 +22,13 @@ public interface PostMapper extends BaseMapper<Post> {
      * @return
      */
     List<PostVO> selectPostPage(IPage page, PostVO post);
-
+    /**
+     * 获取岗位名
+     *
+     * @param ids
+     * @return
+     */
+    List<String> getPostNames(String[] ids);
 }
 
 

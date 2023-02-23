@@ -18,8 +18,10 @@ package com.awx.moxu.utils;
 import com.awx.moxu.entity.AuthInfo;
 import com.awx.moxu.entity.BladeUser;
 import com.awx.moxu.entity.UserInfo;
+import com.awx.moxu.incrementer.BaseContext;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +52,7 @@ public class TokenUtil {
 	 */
 	public static AuthInfo createAuthInfo(UserInfo userInfo) {
 		BladeUser user = userInfo.getUser();
+		BaseContext.setContext(user.getId());
 		//设置jwt参数
 		Map<String, Object> param = new HashMap<>(16);
 		param.put("token_type", "access_token");
