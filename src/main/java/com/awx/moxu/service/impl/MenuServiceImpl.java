@@ -1,6 +1,7 @@
 package com.awx.moxu.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.awx.moxu.utils.ForestNode.ForestNodeMerger;
 import com.awx.moxu.utils.Func;
 import com.awx.moxu.vo.MenuVO;
 import com.awx.moxu.wrapper.MenuWrapper;
@@ -56,6 +57,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu>
         List<Menu> buttons = baseMapper.buttons(Func.toStringList(roleId));
         MenuWrapper menuWrapper = new MenuWrapper();
         return menuWrapper.listNodeVO(buttons);
+    }
+
+    @Override
+    public List<MenuVO> tree() {
+        return ForestNodeMerger.merge(baseMapper.tree());
     }
 
 

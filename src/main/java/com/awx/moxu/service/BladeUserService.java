@@ -5,6 +5,8 @@ import com.awx.moxu.entity.UserInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
 * @author admin
 * @description 针对表【blade_user(用户表)】的数据库操作Service
@@ -26,5 +28,24 @@ public interface BladeUserService extends IService<BladeUser> {
      * @return
      */
     UserInfo userInfo(String account, String password);
-
+    /**
+     * 获取角色名
+     *
+     * @param roleIds
+     * @return
+     */
+    List<String> getRoleName(String roleIds);
+    /**
+     * 获取部门名
+     *
+     * @param deptIds
+     * @return
+     */
+    List<String> getDeptName(String deptIds);
+    /**
+     * 新增或修改用户
+     * @param user
+     * @return
+     */
+    boolean submit(BladeUser user);
 }

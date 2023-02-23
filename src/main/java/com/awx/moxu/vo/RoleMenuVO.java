@@ -15,9 +15,7 @@
  */
 package com.awx.moxu.vo;
 
-import com.awx.moxu.entity.BladeUser;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.awx.moxu.entity.RoleMenu;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -28,32 +26,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UserVO extends BladeUser {
+public class RoleMenuVO extends RoleMenu {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键ID
-	 */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private String id;
-
-	/**
-	 * 角色名
-	 */
-	private String roleName;
-
-	/**
-	 * 岗位名
-	 */
-	private String postName;
-
-	/**
-	 * 部门名
-	 */
-	private String deptName;
-
-	/**
-	 * 性别
-	 */
-	private String sexName;
 }

@@ -13,47 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.awx.moxu.vo;
+package com.awx.moxu.entity;
 
-import com.awx.moxu.entity.BladeUser;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
- * 视图实体类
+ * 实体类
  *
  * @author Chill
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class UserVO extends BladeUser {
+@TableName("blade_role_menu")
+public class RoleMenu implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 主键ID
+	 * 主键
 	 */
+	@TableId(value = "id", type = IdType.ASSIGN_ID)
 	@JsonSerialize(using = ToStringSerializer.class)
 	private String id;
 
 	/**
-	 * 角色名
+	 * 菜单id
 	 */
-	private String roleName;
+	@JsonSerialize(using = ToStringSerializer.class)
+	private String menuId;
 
 	/**
-	 * 岗位名
+	 * 角色id
 	 */
-	private String postName;
+	@JsonSerialize(using = ToStringSerializer.class)
+	private String roleId;
 
-	/**
-	 * 部门名
-	 */
-	private String deptName;
 
-	/**
-	 * 性别
-	 */
-	private String sexName;
 }

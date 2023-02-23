@@ -16,7 +16,7 @@ public class Condition {
     }
 
     public static <T> IPage<T> getPage(Query query) {
-        Page<T> page = new Page((long) Func.toInt(query.getCurrent(), 1), (long)Func.toInt(query.getSize(), 10));
+        Page<T> page = new Page(Func.toInt(query.getCurrent(), 1),Func.toInt(query.getSize(), 10));
         String[] ascArr = Func.toStrArray(query.getAscs());
         String[] descArr = ascArr;
         int var4 = ascArr.length;

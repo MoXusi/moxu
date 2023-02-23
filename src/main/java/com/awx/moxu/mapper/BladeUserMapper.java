@@ -25,6 +25,29 @@ public interface BladeUserMapper extends BaseMapper<BladeUser> {
      * @return
      */
     List<String> getRoleAlias(String id);
+    /**
+     * 获取角色名
+     *
+     * @param ids
+     * @return
+     */
+    List<String> getRoleName(String[] ids);
+
+    /**
+     * 获取角色别名
+     *
+     * @param ids
+     * @return
+     */
+    List<String> getRoleAlias(String[] ids);
+
+    /**
+     * 获取部门名
+     *
+     * @param ids
+     * @return
+     */
+    List<String> getDeptName(String[] ids);
 }
 
 

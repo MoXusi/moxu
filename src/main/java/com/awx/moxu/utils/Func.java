@@ -1,14 +1,13 @@
 package com.awx.moxu.utils;
 
 import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.awx.moxu.utils.blade.NumberUtil;
 import org.springframework.lang.Nullable;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Func {
 
@@ -65,5 +64,11 @@ public class Func {
 
     public static String toStr(Object str, String defaultValue) {
         return null == str ? defaultValue : String.valueOf(str);
+    }
+    public static int toInt(final Object value) {
+        return NumberUtil.toInt(String.valueOf(value));
+    }
+    public static String join(List list){
+        return ArrayUtil.join(list.toArray(),",");
     }
 }

@@ -30,4 +30,11 @@ public interface MenuService extends IService<Menu> {
      */
     List<MenuVO> buttons(String roleId);
 
+    /**
+     * 树形结构
+     *
+     * @return
+     */
+    List<MenuVO> tree();
+
 }

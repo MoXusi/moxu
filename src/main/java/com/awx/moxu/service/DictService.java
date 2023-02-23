@@ -25,4 +25,21 @@ public interface DictService extends IService<Dict> {
      * @return
      */
     boolean submit(Dict dict);
+
+    /**
+     * 获取字典表对应中文
+     *
+     * @param code    字典编号
+     * @param dictKey 字典序号
+     * @return
+     */
+    String getValue(String code, Integer dictKey);
+
+    /**
+     * 获取字典表
+     *
+     * @param code 字典编号
+     * @return
+     */
+    List<Dict> getList(String code);
 }

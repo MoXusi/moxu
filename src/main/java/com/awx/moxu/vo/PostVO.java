@@ -15,45 +15,22 @@
  */
 package com.awx.moxu.vo;
 
-import com.awx.moxu.entity.BladeUser;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.awx.moxu.entity.Post;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 /**
- * 视图实体类
+ * 岗位表视图实体类
  *
  * @author Chill
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UserVO extends BladeUser {
+public class PostVO extends Post {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 主键ID
+	 * 岗位分类名
 	 */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private String id;
+	private String categoryName;
 
-	/**
-	 * 角色名
-	 */
-	private String roleName;
-
-	/**
-	 * 岗位名
-	 */
-	private String postName;
-
-	/**
-	 * 部门名
-	 */
-	private String deptName;
-
-	/**
-	 * 性别
-	 */
-	private String sexName;
 }

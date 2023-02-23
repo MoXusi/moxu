@@ -15,11 +15,19 @@
  */
 package com.awx.moxu.vo;
 
-import com.awx.moxu.entity.BladeUser;
+import com.awx.moxu.entity.Dept;
+import com.awx.moxu.utils.ForestNode.INode;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * 视图实体类
@@ -28,7 +36,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UserVO extends BladeUser {
+public class DeptVO extends Dept implements INode {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -38,22 +46,28 @@ public class UserVO extends BladeUser {
 	private String id;
 
 	/**
-	 * 角色名
+	 * 父节点ID
 	 */
-	private String roleName;
+	@JsonSerialize(using = ToStringSerializer.class)
+	private String parentId;
 
 	/**
-	 * 岗位名
+	 * 子孙节点
 	 */
-	private String postName;
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private List<INode> children;
+
+	@Override
+	public List<INode> getChildren() {
+		if (this.children == null) {
+			this.children = new ArrayList<>();
+		}
+		return this.children;
+	}
 
 	/**
-	 * 部门名
+	 * 上级部门
 	 */
-	private String deptName;
+	private String parentName;
 
-	/**
-	 * 性别
-	 */
-	private String sexName;
 }

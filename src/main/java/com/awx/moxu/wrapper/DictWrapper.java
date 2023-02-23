@@ -4,8 +4,10 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.awx.moxu.constant.CommonConstant;
 import com.awx.moxu.entity.Dict;
 import com.awx.moxu.service.DictService;
+import com.awx.moxu.utils.ForestNode.BaseEntityWrapper;
 import com.awx.moxu.utils.ForestNode.ForestNodeMerger;
 import com.awx.moxu.utils.ForestNode.INode;
+import com.awx.moxu.utils.Func;
 import com.awx.moxu.vo.DictVO;
 import cn.hutool.core.bean.BeanUtil;
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.stream.Collectors;
  *
  * @author Chill
  */
-public class DictWrapper {
+public class DictWrapper extends BaseEntityWrapper<Dict, DictVO> {
 
     private static DictService dictService;
 
@@ -28,9 +30,10 @@ public class DictWrapper {
         return new DictWrapper();
     }
 
+    @Override
     public DictVO entityVO(Dict dict) {
         DictVO dictVO = BeanUtil.copyProperties(dict, DictVO.class);
-        if (!dict.getParentId().equals(CommonConstant.TOP_PARENT_ID)) {
+        if (Func.equals(dict.getParentId(), CommonConstant.TOP_PARENT_ID)) {
             dictVO.setParentName(CommonConstant.TOP_PARENT_NAME);
         } else {
             Dict parent = dictService.getById(dict.getParentId());

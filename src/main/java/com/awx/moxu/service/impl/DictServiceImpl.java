@@ -4,6 +4,7 @@ import com.awx.moxu.filter.BizException;
 import com.awx.moxu.utils.ForestNode.ForestNodeMerger;
 import com.awx.moxu.utils.Func;
 import com.awx.moxu.utils.R.R;
+import com.awx.moxu.utils.blade.StringPool;
 import com.awx.moxu.vo.DictVO;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -12,6 +13,7 @@ import com.awx.moxu.entity.Dict;
 import com.awx.moxu.service.DictService;
 import com.awx.moxu.mapper.DictMapper;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,8 +42,15 @@ implements DictService{
         return saveOrUpdate(dict);
     }
 
+    @Override
+    public String getValue(String code, Integer dictKey) {
+        return Func.toStr(baseMapper.getValue(code, dictKey), StringPool.EMPTY);
+    }
 
-
+    @Override
+    public List<Dict> getList(String code) {
+        return baseMapper.getList(code);
+    }
 
 }
 

@@ -75,4 +75,16 @@ public class DictController {
     public R remove(@RequestParam String ids) {
         return R.status(dictService.removeByIds(Func.toStringList(ids)));
     }
+
+    /**
+     * 获取字典
+     *
+     * @return
+     */
+    @GetMapping("/dictionary")
+    public R<List<Dict>> dictionary(String code) {
+        List<Dict> tree = dictService.getList(code);
+        return R.data(tree);
+    }
+
 }

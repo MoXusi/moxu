@@ -40,8 +40,21 @@
     <select id="queryById" resultMap="BaseResultMap">
         select
             id, code, account, password, name, real_name, avatar, email, phone, birthday, sex, role_id, dept_id, post_id, create_user, create_time, update_user, update_time, status, is_deleted
-        from moxu.blade_user
+        from blade_user
         where id = #{id}
+    </select>
+
+    <select id="getRoleName" resultType="java.lang.String">
+        SELECT
+        role_name
+        FROM
+        blade_role
+        WHERE
+        id IN
+        <foreach collection="array" item="ids" index="index" open="(" close=")" separator=",">
+            #{ids}
+        </foreach>
+        and is_deleted = 0
     </select>
 
     <select id="getRoleAlias" resultType="java.lang.String">
@@ -54,4 +67,16 @@
         and is_deleted = 0
     </select>
 
+    <select id="getDeptName" resultType="java.lang.String">
+        SELECT
+        dept_name
+        FROM
+        dept
+        WHERE
+        id IN
+        <foreach collection="array" item="ids" index="index" open="(" close=")" separator=",">
+            #{ids}
+        </foreach>
+        and is_deleted = 0
+    </select>
 </mapper>

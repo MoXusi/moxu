@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awx.moxu.mapper.BladeRoleMapper">
+
+    <resultMap id="roleResultMap" type="com.awx.moxu.entity.BladeRole">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="parentId" column="parent_id" jdbcType="VARCHAR"/>
+            <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+            <result property="sort" column="sort" jdbcType="INTEGER"/>
+            <result property="roleAlias" column="role_alias" jdbcType="VARCHAR"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,parent_id,role_name,
+        sort,role_alias,is_deleted
+    </sql>
+    <resultMap id="treeNodeResultMap" type="com.awx.moxu.utils.ForestNode.TreeNode">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="title" property="title"/>
+        <result column="value" property="value"/>
+        <result column="key" property="key"/>
+    </resultMap>
+
+    <select id="selectRolePage" resultMap="roleResultMap">
+        select * from blade_role where is_deleted = 0
+    </select>
+
+    <select id="tree" resultMap="treeNodeResultMap">
+        select id, parent_id, role_name as title, id as 'value', id as 'key' from blade_role where is_deleted = 0
+        <if test="param1!=null">
+            and tenant_id = #{param1}
+        </if>
+        <if test="param2!=null">
+            and role_alias &lt;&gt; #{param2}
+        </if>
+    </select>
+</mapper>

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.awx.moxu.controller;
+package com.awx.moxu.constant;
 
 /**
  * 缓存名

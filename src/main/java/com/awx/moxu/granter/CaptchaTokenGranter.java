@@ -16,11 +16,10 @@
 package com.awx.moxu.granter;
 
 import cn.hutool.core.util.StrUtil;
-import com.awx.moxu.controller.CacheNames;
+import com.awx.moxu.constant.CacheNames;
 import com.awx.moxu.entity.UserInfo;
 import com.awx.moxu.filter.BizException;
 import com.awx.moxu.service.impl.BladeUserServiceImpl;
-import com.awx.moxu.utils.R.R;
 import com.awx.moxu.utils.RedisUtils;
 import com.awx.moxu.utils.TokenUtil;
 import com.awx.moxu.utils.WebUtils;
@@ -28,7 +27,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 

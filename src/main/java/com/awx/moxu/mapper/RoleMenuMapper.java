@@ -13,47 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.awx.moxu.vo;
+package com.awx.moxu.mapper;
 
-import com.awx.moxu.entity.BladeUser;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.awx.moxu.entity.RoleMenu;
+import com.awx.moxu.vo.RoleMenuVO;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.apache.ibatis.annotations.Mapper;
+
+
+import java.util.List;
 
 /**
- * 视图实体类
+ * Mapper 接口
  *
  * @author Chill
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
-public class UserVO extends BladeUser {
-	private static final long serialVersionUID = 1L;
+@Mapper
+public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
 
 	/**
-	 * 主键ID
+	 * 自定义分页
+	 * @param page
+	 * @param roleMenu
+	 * @return
 	 */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private String id;
+	List<RoleMenuVO> selectRoleMenuPage(IPage page, RoleMenuVO roleMenu);
 
-	/**
-	 * 角色名
-	 */
-	private String roleName;
-
-	/**
-	 * 岗位名
-	 */
-	private String postName;
-
-	/**
-	 * 部门名
-	 */
-	private String deptName;
-
-	/**
-	 * 性别
-	 */
-	private String sexName;
 }

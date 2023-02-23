@@ -18,25 +18,22 @@ package com.awx.moxu.controller;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.awx.moxu.constant.CacheNames;
 import com.awx.moxu.entity.AuthInfo;
 import com.awx.moxu.entity.UserInfo;
 import com.awx.moxu.granter.ITokenGranter;
-import com.awx.moxu.granter.PasswordTokenGranter;
 import com.awx.moxu.granter.TokenGranterBuilder;
 import com.awx.moxu.utils.R.R;
 import com.awx.moxu.utils.RedisUtils;
 import com.awx.moxu.utils.TokenUtil;
 import com.wf.captcha.SpecCaptcha;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 
 /**
