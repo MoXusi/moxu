@@ -1,12 +1,18 @@
 package com.awx.moxu.incrementer;
 
 import cn.hutool.core.util.IdUtil;
+import com.awx.moxu.constant.BladeConstant;
+import com.awx.moxu.entity.BladeUser;
+import com.awx.moxu.utils.JwtUtils;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
@@ -17,14 +23,13 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         log.info("start insert fill ....");
-//        this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now()); // 起始版本 3.3.0(推荐使用)
-        // 或者
-        String userId = BaseContext.getContext();
-        this.strictInsertFill(metaObject, "createUser", () ->userId, String.class); // 起始版本 3.3.3(推荐)
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        BladeUser user = JwtUtils.getUser(request);
+        this.strictInsertFill(metaObject, "createUser", () ->user.getId(), String.class); // 起始版本 3.3.3(推荐)
         this.strictInsertFill(metaObject, "createTime", () -> new Date(), Date.class); // 起始版本 3.3.3(推荐)
-        if (metaObject.hasGetter("id") && metaObject.hasSetter("id")){
+        if (metaObject.hasGetter(BladeConstant.DB_PRIMARY_KEY) && metaObject.hasSetter(BladeConstant.DB_PRIMARY_KEY)){
             // 获取旧值
-            Object lastSave = metaObject.getValue("id");
+            Object lastSave = metaObject.getValue(BladeConstant.DB_PRIMARY_KEY);
             // 判断旧值不存在
 //            if (Objects.isNull(lastSave) || lastSave instanceof String){
 //                // 旧值的合法性检测
@@ -36,19 +41,14 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
                 setFieldValByName("id", IdUtil.simpleUUID(),metaObject);
             }
         }
-        // 或者
-        //this.fillStrategy(metaObject, "createTime", LocalDateTime.now()); // 也可以使用(3.3.0 该方法有bug)
-    }
+     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("start update fill ....");
-        //this.strictUpdateFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now()); // 起始版本 3.3.0(推荐)
-        // 或者
-        String userId = BaseContext.getContext();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        BladeUser user = JwtUtils.getUser(request);
         this.strictUpdateFill(metaObject, "updateTime", () -> new Date(), Date.class); // 起始版本 3.3.3(推荐)
-        this.strictUpdateFill(metaObject, "updateUser", () -> userId, String.class); // 起始版本 3.3.3(推荐)
-        // 或者
-        //this.fillStrategy(metaObject, "updateTime", LocalDateTime.now()); // 也可以使用(3.3.0 该方法有bug)
+        this.strictUpdateFill(metaObject, "updateUser", () -> user.getId(), String.class); // 起始版本 3.3.3(推荐)
     }
 }

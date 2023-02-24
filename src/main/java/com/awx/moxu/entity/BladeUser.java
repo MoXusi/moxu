@@ -91,7 +91,7 @@ public class BladeUser extends BaseEntity {
     /**
      * 是否已删除
      */
-    private Integer isDeleted;
+    private Integer isDeleted = 0;
 
 
 

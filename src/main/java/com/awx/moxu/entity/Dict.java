@@ -55,7 +55,7 @@ public class Dict implements Serializable {
     /**
      * 是否已删除
      */
-    private Integer isDeleted;
+    private Integer isDeleted = 0;
 
     @Override
     public boolean equals(Object that) {

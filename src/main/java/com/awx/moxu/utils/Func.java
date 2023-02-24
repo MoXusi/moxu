@@ -40,6 +40,10 @@ public class Func {
     public static boolean isEmpty(@Nullable Object obj) {
         return ObjectUtil.isEmpty(obj);
     }
+    public static boolean isNotEmpty(@Nullable Object obj) {
+        return !ObjectUtil.isEmpty(obj);
+    }
+
 
     public static boolean hasEmpty(Object... os) {
         Object[] var1 = os;

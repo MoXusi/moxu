@@ -42,7 +42,7 @@ public class BladeRole implements Serializable {
     /**
      * 是否已删除
      */
-    private Integer isDeleted;
+    private Integer isDeleted = 0;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
