@@ -6,6 +6,7 @@ import com.awx.moxu.entity.BladeUser;
 import com.awx.moxu.service.BladeUserService;
 import com.awx.moxu.utils.JwtUtils;
 import com.awx.moxu.utils.R.R;
+import com.awx.moxu.utils.User;
 import com.awx.moxu.utils.execl.UserExcel;
 import com.awx.moxu.utils.support.Condition;
 import com.awx.moxu.utils.support.Query;
@@ -48,8 +49,8 @@ public class UserController {
      * 查询单条
      */
     @GetMapping("/info")
-    public R<UserVO> info(HttpServletRequest request) {
-        BladeUser detail = userService.getById(JwtUtils.getUser(request).getId());
+    public R<UserVO> info(User user) {
+        BladeUser detail = userService.getById(user.getUserId());
         return R.data(UserWrapper.build().entityVO(detail));
     }
 

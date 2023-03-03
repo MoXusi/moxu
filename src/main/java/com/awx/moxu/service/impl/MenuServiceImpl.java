@@ -1,8 +1,15 @@
 package com.awx.moxu.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.awx.moxu.constant.BladeConstant;
+import com.awx.moxu.constant.CommonConstant;
+import com.awx.moxu.dto.MenuDTO;
+import com.awx.moxu.entity.RoleMenu;
+import com.awx.moxu.service.RoleMenuService;
 import com.awx.moxu.utils.ForestNode.ForestNodeMerger;
 import com.awx.moxu.utils.Func;
+import com.awx.moxu.utils.R.Kv;
+import com.awx.moxu.utils.User;
 import com.awx.moxu.vo.MenuVO;
 import com.awx.moxu.wrapper.MenuWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -11,13 +18,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.awx.moxu.entity.Menu;
 import com.awx.moxu.service.MenuService;
 import com.awx.moxu.mapper.MenuMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -26,9 +31,11 @@ import java.util.stream.Collectors;
 * @createDate 2023-02-14 21:55:25
 */
 @Service
+@AllArgsConstructor
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu>
     implements MenuService{
 
+    RoleMenuService roleMenuService;
 
     @Override
     public List<MenuVO> routes(String roleId) {
@@ -64,7 +71,27 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu>
         return ForestNodeMerger.merge(baseMapper.tree());
     }
 
+    @Override
+    public List<MenuVO> grantTree(User user) {
+        return ForestNodeMerger.merge(user.getRoleId().indexOf(CommonConstant.MO_XU)!=-1? baseMapper.grantTree():baseMapper.grantTreeByRole(Func.toStringList(user.getRoleId())));
+    }
 
+    @Override
+    public List<String> roleTreeKeys(String roleIds) {
+        List<RoleMenu> roleMenus = roleMenuService.list(Wrappers.<RoleMenu>query().lambda().in(RoleMenu::getRoleId, Func.toStringList(roleIds)));
+        return roleMenus.stream().map(roleMenu -> Func.toStr(roleMenu.getMenuId())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Kv> authRoutes(User user) {
+        if (Func.isEmpty(user)) {
+            return null;
+        }
+        List<MenuDTO> routes = baseMapper.authRoutes(Func.toStringList(user.getRoleId()));
+        List<Kv> list = new ArrayList<>();
+        routes.forEach(route -> list.add(Kv.init().set(route.getPath(), Kv.init().set("authority", Func.toStrArray(route.getAlias())))));
+        return list;
+    }
 }
 
 

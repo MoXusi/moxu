@@ -32,7 +32,10 @@ public interface CommonConstant {
 	 * 默认密码
 	 */
 	String DEFAULT_PASSWORD = "123456";
-
+	/**
+	 * 特殊管理id
+	 */
+	String MO_XU = "1030";
 
 	/**
 	 * 默认密码

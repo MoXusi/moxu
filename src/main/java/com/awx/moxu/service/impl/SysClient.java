@@ -6,18 +6,18 @@ import com.awx.moxu.service.BladeRoleService;
 import com.awx.moxu.service.DeptService;
 import com.awx.moxu.service.ISysClient;
 import com.awx.moxu.service.PostService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.Resource;
 import java.util.List;
-
+@AllArgsConstructor
 @Service
 public class SysClient implements ISysClient {
     private DeptService deptService;
-
     private PostService postService;
-
     private BladeRoleService roleService;
     @Override
     public Dept getDept(String id) {

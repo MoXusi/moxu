@@ -8,6 +8,7 @@ import com.awx.moxu.service.impl.MenuServiceImpl;
 import com.awx.moxu.utils.Func;
 import com.awx.moxu.utils.JwtUtils;
 import com.awx.moxu.utils.R.R;
+import com.awx.moxu.utils.User;
 import com.awx.moxu.utils.support.Condition;
 import com.awx.moxu.vo.MenuVO;
 import com.awx.moxu.wrapper.MenuWrapper;
@@ -47,17 +48,15 @@ public class MenuController {
      * 前端菜单数据
      */
     @GetMapping("/routes")
-    public R<List<MenuVO>> routes(HttpServletRequest request) {
-        BladeUser user = JwtUtils.getUser(request);
-        List<MenuVO> list = menuService.routes((user == null || user.getId() == "") ? null : user.getRoleId());
+    public R<List<MenuVO>> routes(User user) {
+        List<MenuVO> list = menuService.routes((user == null || user.getUserId() == "") ? null : user.getRoleId());
         return R.data(list);
     }
     /**
      * 前端按钮数据
      */
     @GetMapping("/buttons")
-    public R<List<MenuVO>> buttons(HttpServletRequest request) {
-        BladeUser user = JwtUtils.getUser(request);
+    public R<List<MenuVO>> buttons(User user) {
         List<MenuVO> list = menuService.buttons(user.getRoleId());
         return R.data(list);
     }
@@ -86,5 +85,22 @@ public class MenuController {
         List<MenuVO> tree = menuService.tree();
         return R.data(tree);
     }
+
+    /**
+     * 获取权限分配树形结构
+     */
+    @GetMapping("/grant-tree")
+    public R<List<MenuVO>> grantTree(User user) {
+        return R.data(menuService.grantTree(user));
+    }
+
+    /**
+     * 获取权限分配树形结构
+     */
+    @GetMapping("/role-tree-keys")
+    public R<List<String>> roleTreeKeys(String roleIds) {
+        return R.data(menuService.roleTreeKeys(roleIds));
+    }
+
 
 }

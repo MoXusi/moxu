@@ -13,45 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.awx.moxu.entity;
+package com.awx.moxu.dto;
 
-import com.baomidou.mybatisplus.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * 实体类
+ * 数据传输对象实体类
  *
  * @author Chill
  */
 @Data
-@TableName("blade_role_menu")
-public class RoleMenu implements Serializable {
-
+public class MenuDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 主键
-	 */
-	@TableId(value = "id", type = IdType.ASSIGN_ID)
-	@JsonSerialize(using = ToStringSerializer.class)
-	@TableField(fill = FieldFill.INSERT)
-	private String id;
-
-	/**
-	 * 菜单id
-	 */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private String menuId;
-
-	/**
-	 * 角色id
-	 */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private String roleId;
-
-
+	private String alias;
+	private String path;
 }

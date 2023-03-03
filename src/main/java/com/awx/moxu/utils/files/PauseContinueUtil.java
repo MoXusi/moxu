@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 
+/**
+ * @author 沫须水
+ */
 public class PauseContinueUtil {
 
     /**

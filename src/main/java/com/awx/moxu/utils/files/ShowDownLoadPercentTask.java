@@ -1,10 +1,11 @@
 package com.awx.moxu.utils.files;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * @author 沫须水
+ */
 public class ShowDownLoadPercentTask extends TimerTask{
 
     private Timer timer;
@@ -20,6 +21,7 @@ public class ShowDownLoadPercentTask extends TimerTask{
         this.timer = timer;
     }
 
+    @Override
     public void run() {
         long currentLen = 0;
         long totleLen = dtc.getFile().length();

@@ -6,7 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 用户表
@@ -17,7 +20,12 @@ import lombok.Data;
 @Data
 public class BladeUser extends BaseEntity {
 
-
+    /**
+     * 主键
+     */
+    @TableId
+    @TableField(fill = FieldFill.INSERT)
+    private String id;
     /**
      * 用户编号
      */
@@ -61,6 +69,8 @@ public class BladeUser extends BaseEntity {
     /**
      * 生日
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING,
+            pattern="yyyy-MM-dd HH:mm:ss",  timezone = "GMT+8" )
     private Date birthday;
 
     /**

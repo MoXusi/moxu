@@ -1,6 +1,7 @@
 package com.awx.moxu.entity;
 
 import com.awx.moxu.base.BaseEntity;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -19,6 +20,7 @@ public class Post extends BaseEntity implements Serializable {
      * 主键
      */
     @TableId
+    @TableField(fill = FieldFill.INSERT)
     private String id;
 
     /**

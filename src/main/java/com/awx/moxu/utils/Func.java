@@ -75,4 +75,18 @@ public class Func {
     public static String join(List list){
         return ArrayUtil.join(list.toArray(),",");
     }
+
+    public static Map<String, Object> urlMap(String urlParam){
+        Map<String, Object> map=new HashMap<String, Object>();
+        String[] arr=urlParam.split("&");
+        if(arr==null){
+            return null;
+        }
+        for (int i = 0; i <arr.length; i++) {
+            String key=arr[i].substring(0, arr[i].indexOf("="));
+            String value=arr[i].substring( arr[i].indexOf("=")+1);
+            map.put(key, value);
+        }
+        return map;
+    }
 }

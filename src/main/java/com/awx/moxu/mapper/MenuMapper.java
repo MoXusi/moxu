@@ -1,5 +1,6 @@
 package com.awx.moxu.mapper;
 
+import com.awx.moxu.dto.MenuDTO;
 import com.awx.moxu.entity.Menu;
 import com.awx.moxu.vo.MenuVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -48,6 +49,38 @@ public interface MenuMapper extends BaseMapper<Menu> {
      * @return
      */
     List<MenuVO> tree();
+
+    /**
+     * 授权树形结构
+     *
+     * @return
+     */
+    List<MenuVO> grantTree();
+
+    /**
+     * 授权树形结构
+     *
+     * @param roleId
+     * @return
+     */
+    List<MenuVO> grantTreeByRole(List<String> roleId);
+
+    /**
+     * 菜单树形结构
+     *
+     * @param roleId
+     * @return
+     */
+    List<Menu> routes(List<String> roleId);
+
+
+    /**
+     * 获取配置的角色权限
+     *
+     * @param roleIds
+     * @return
+     */
+    List<MenuDTO> authRoutes(List<String> roleIds);
 }
 
 

@@ -9,10 +9,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 //@Component
 @Component
@@ -143,21 +140,51 @@ public class JwtUtils {
      * @param request
      * @return String
      */
-    public static BladeUser getUser(HttpServletRequest request) {
+    public static User getUser(HttpServletRequest request) {
+        if (request==null){
+            return null;
+        }
+        Object bladeUser = request.getAttribute("_BLADE_USER_REQUEST_ATTR_");
+        if (bladeUser != null) {
+            return (User)bladeUser;
+        }
         String path = request.getRequestURI();
         if (StrUtil.hasBlank(path)) {
             return null;
         }
         Enumeration<String> headers = request.getHeaders(AuthProvider.AUTH_KEY);
-        String headerToken = headers.nextElement();
+        String headerToken=null;
+        try {
+            headerToken = headers.nextElement();
+        }catch (Exception e){}
+        try {
+            String queryString = request.getQueryString();
+            Map<String, Object> map = Func.urlMap(queryString);
+            if(map!=null&&map.size()>0){
+                Iterator<String> set3 = map.keySet().iterator();
+                while(set3.hasNext()){
+                    String key = set3.next();
+                    if(key.equals("blade-auth")){
+                        headerToken= (String) map.get(key);
+                    }
+                }
+
+            }
+        }catch (Exception e){}
         if (StrUtil.isBlank(headerToken)){
             return null;
         }
         String token = JwtUtils.getToken(headerToken);
         Map<String, Object> payLoadALSOExcludeExpAndIat = JwtUtils.getPayLoadALSOExcludeExpAndIat(token);
-        BladeUser bladeUser = BeanUtil.mapToBean(payLoadALSOExcludeExpAndIat, BladeUser.class, false);
-        return bladeUser;
+        bladeUser = BeanUtil.mapToBean(payLoadALSOExcludeExpAndIat, User.class, false);
+        if (bladeUser != null) {
+            request.setAttribute("_BLADE_USER_REQUEST_ATTR_", bladeUser);
+        }
+        return (User) bladeUser;
     }
+
+
+
     public static void main(String[] args) {
         Date exp = new Date(System.currentTimeMillis()+60*60*24);
         HashMap<String, Object> hashMap = new HashMap<>();

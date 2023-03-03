@@ -20,12 +20,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class BaseEntity implements Serializable {
 
-    /**
-     * 主键
-     */
-    @TableId
-    @TableField(fill = FieldFill.INSERT)
-    private String id;
+
     /**
      * 创建人
      */

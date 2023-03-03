@@ -2,6 +2,8 @@ package com.awx.moxu.service;
 
 import com.awx.moxu.entity.Dict;
 import com.awx.moxu.entity.Menu;
+import com.awx.moxu.utils.R.Kv;
+import com.awx.moxu.utils.User;
 import com.awx.moxu.vo.MenuVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -36,5 +38,27 @@ public interface MenuService extends IService<Menu> {
      * @return
      */
     List<MenuVO> tree();
+    /**
+     * 授权树形结构
+     *
+     * @param user
+     * @return
+     */
+    List<MenuVO> grantTree(User user);
 
+    /**
+     * 默认选中节点
+     *
+     * @param roleIds
+     * @return
+     */
+    List<String> roleTreeKeys(String roleIds);
+
+    /**
+     * 获取配置的角色权限
+     *
+     * @param user
+     * @return
+     */
+    List<Kv> authRoutes(User user);
 }

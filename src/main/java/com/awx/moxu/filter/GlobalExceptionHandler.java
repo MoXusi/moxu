@@ -1,6 +1,7 @@
 package com.awx.moxu.filter;
 
 import cn.hutool.core.util.StrUtil;
+import com.awx.moxu.utils.Func;
 import com.awx.moxu.utils.JwtUtils;
 import com.awx.moxu.utils.R.R;
 import com.awx.moxu.utils.exception.ApiCode;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * @description: 自定义异常处理
@@ -47,7 +50,18 @@ public class GlobalExceptionHandler {
             headerToken = headers.nextElement();
         }catch (Exception e){}
         try {
-            cookie = request.getHeaders("cookie").nextElement().split(";")[1].split("=")[1];
+            String queryString = request.getQueryString();
+            Map<String, Object> map = Func.urlMap(queryString);
+            if(map!=null&&map.size()>0){
+                Iterator<String> set3 = map.keySet().iterator();
+                while(set3.hasNext()){
+                    String key = set3.next();
+                    if(key.equals("blade-auth")){
+                        cookie= (String) map.get(key);
+                    }
+                }
+
+            }
         }catch (Exception e){}
         if (StrUtil.isAllBlank(headerToken,cookie)){
             throw new BizException(401, "缺失令牌,鉴权失败");

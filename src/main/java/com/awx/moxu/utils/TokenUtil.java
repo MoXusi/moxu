@@ -57,7 +57,7 @@ public class TokenUtil {
 		Map<String, Object> param = new HashMap<>(16);
 		param.put("token_type", "access_token");
 		param.put("oauth_id", userInfo.getOauthId());
-		param.put("id", user.getId());
+		param.put("user_id", user.getId());
 		param.put("role_id", user.getRoleId());
 		param.put("account", user.getAccount());
 		param.put("name", user.getAccount());

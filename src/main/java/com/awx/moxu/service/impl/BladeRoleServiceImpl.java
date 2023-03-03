@@ -5,11 +5,13 @@ import com.awx.moxu.service.RoleMenuService;
 import com.awx.moxu.utils.ForestNode.ForestNodeMerger;
 import com.awx.moxu.utils.Func;
 import com.awx.moxu.vo.RoleVO;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.awx.moxu.entity.BladeRole;
 import com.awx.moxu.service.BladeRoleService;
 import com.awx.moxu.mapper.BladeRoleMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
  *
  */
 @Service
+@AllArgsConstructor
 public class BladeRoleServiceImpl extends ServiceImpl<BladeRoleMapper, BladeRole>
 implements BladeRoleService{
 

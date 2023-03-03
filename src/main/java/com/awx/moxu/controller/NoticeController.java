@@ -24,6 +24,11 @@ import java.util.Map;
 public class NoticeController implements CacheNames {
     private NoticeService noticeService;
 
+    @GetMapping("/handleOt")
+    public void handleOt() {
+
+
+    }
     /**
      * 详情
      */

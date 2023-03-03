@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 
+/**
+ * @author 沫须水
+ */
 public class DownThread extends Thread {
 
     private final int BUFF_LEN = 1024;
@@ -28,6 +31,7 @@ public class DownThread extends Thread {
         this.flag = flag;
     }
 
+    @Override
     public void run(){
         //System.out.println("Thread "+ flag +" start!");
         try {

@@ -10,6 +10,9 @@ import java.util.Timer;
 import java.util.UUID;
 
 
+/**
+ * @author 沫须水
+ */
 public class DownThreadClient {
 
     //默认启动4个线程

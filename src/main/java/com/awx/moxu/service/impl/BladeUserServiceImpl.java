@@ -18,6 +18,7 @@ import com.awx.moxu.service.BladeUserService;
 import com.awx.moxu.mapper.BladeUserMapper;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ import java.util.List;
 @Service
 public class BladeUserServiceImpl extends ServiceImpl<BladeUserMapper, BladeUser>
     implements BladeUserService{
-
+    @Resource
     private ISysClient sysClient;
 
     @Override
@@ -75,9 +76,9 @@ public class BladeUserServiceImpl extends ServiceImpl<BladeUserMapper, BladeUser
     public List<UserExcel> exportUser(Wrapper<BladeUser> queryWrapper) {
         List<UserExcel> userList = baseMapper.exportUser(queryWrapper);
         userList.forEach(user -> {
-            user.setRoleName(ArrayUtil.join(sysClient.getRoleName(user.getRoleId()),","));
-            user.setDeptName(ArrayUtil.join(sysClient.getDeptNames(user.getDeptId()),","));
-            user.setPostName(ArrayUtil.join(sysClient.getPostNames(user.getPostId()),","));
+            user.setRoleName(ArrayUtil.join(sysClient.getRoleNames(user.getRoleId()).toArray(),","));
+            user.setDeptName(ArrayUtil.join(sysClient.getDeptNames(user.getDeptId()).toArray(),","));
+            user.setPostName(ArrayUtil.join(sysClient.getPostNames(user.getPostId()).toArray(),","));
         });
         return userList;
     }
